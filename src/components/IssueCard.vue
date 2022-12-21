@@ -1,0 +1,73 @@
+<template>
+    <v-card elevation="2" outlined>
+        <v-container>
+            <v-row  class="d-flex justify-space-between">
+                <v-col>
+                    <v-text-field
+                        label="Title"
+                        outlined
+                    ></v-text-field>
+                </v-col>
+                <v-col>
+                    <v-text-field
+                        label="IssueType"
+                        outlined
+                    ></v-text-field>
+                </v-col>
+
+                <v-col>
+                    <v-text-field
+                        label="Priority"
+                        outlined
+                    ></v-text-field>
+                </v-col>
+            </v-row>      
+            <v-textarea
+                label="Description"  
+                auto-grow
+                outlined
+                rows="1"
+                row-height="15"
+            ></v-textarea>
+            <v-row  class="d-flex justify-space-between align-baseline">
+                <v-col>
+                    <v-text-field
+                        label="Created"
+                        outlined
+                    ></v-text-field>
+                </v-col>
+                <v-col>
+                    <v-text-field
+                        label="Completed"
+                        outlined
+                    ></v-text-field>
+                </v-col>
+                <v-row
+                    align="center"
+                    justify="space-around"
+                >
+                    <v-btn 
+                        depressed
+                        color="primary"
+                        x-large
+                    >
+                        Abort
+                    </v-btn>
+                    <v-btn
+                        outlined
+                        x-large
+                    >
+                        Save Issue
+                    </v-btn>
+                    <v-btn
+                        outlined
+                        color="error"
+                        x-large
+                    >
+                        Delete Issue
+                    </v-btn>
+                </v-row>
+            </v-row>      
+        </v-container>   
+    </v-card>
+</template>

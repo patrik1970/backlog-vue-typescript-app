@@ -9,6 +9,11 @@ const routes: Array<RouteConfig> = [
         alias: "/issuetable",
         name: "issuetable",
         component: () => import("../components/IssueTable.vue")
+    },
+    {
+        path: "/issue-card",
+        name: "issue-card",
+        component: () => import("../components/IssueCard.vue")
     }
 ];
 
