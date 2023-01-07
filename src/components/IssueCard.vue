@@ -6,29 +6,29 @@
                     <v-text-field
                         label="Title"
                         outlined
+                        v-model="issue.title"
                     ></v-text-field>
                 </v-col>
                 <v-col>
-                    <v-select 
-                        :items="issueTypes"
-                        item-text="issueType"
-                        item-value="index"
-                        label="IssueType"
-                        outlined
-                    ></v-select>
+                    <select class="selectbox">
+                        <option value=''> {{ (issue.issueType === 0) ? ('Feature') : (issue.issueType === 1) ? ('Bug'): (issue.issueType === 2) ? ('Documentation'): '' }}</option>
+                        <option value='0'>Feature</option>
+                        <option value='1'>Bug</option>
+                        <option value='2'>Documentation</option>
+                    </select>  
                 </v-col>
                 <v-col>
-                    <v-select 
-                        :items="prioritys"
-                        item-text="priority"
-                        item-value="index"
-                        label="Priority"
-                        outlined
-                    ></v-select>
+                    <select class="selectbox">
+                        <option value=''> {{ (issue.priority === 0) ? ('Low') : (issue.priority === 1) ? ('Medium'): (issue.priority === 2) ? ('High'): '' }}</option>
+                        <option value='0'>Low</option>
+                        <option value='1'>Medium</option>
+                        <option value='2'>High</option>
+                    </select>  
                 </v-col>
             </v-row>      
             <v-textarea
-                label="Description"  
+                label="Description" 
+                v-model="issue.description" 
                 auto-grow
                 outlined
                 rows="1"
@@ -48,7 +48,7 @@
                         <template v-slot:activator="{ on, attrs }">
                             <v-text-field
                                 outlined
-                                v-model="date1"
+                                v-model="issue.created"
                                 label="Created"
                                 prepend-icon="mdi-calendar"
                                 readonly
@@ -57,7 +57,7 @@
                             ></v-text-field>
                         </template>
                         <v-date-picker
-                            v-model="date1"
+                            v-model="issue.created"
                             no-title
                             scrollable
                         >
@@ -153,23 +153,51 @@
     </v-card>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      issueTypes: [
-        { issueType: "Bug", index: '1' },
-        { issueType: "Feature", index: '2' },      
-        { issueType: "Documentation", index: '3' }
-      ],
-      prioritys: [
-        { priority: "Low", index: '1' },
-        { priority: "Medium", index: '2' },      
-        { priority: "High", index: '3' }  
-      ],
-      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      menu1: false,
-      modal: false,
-      menu2: false,
-    }),
+<script lang="ts">
+    import { Component, Vue } from "vue-property-decorator";
+    import IssueDataService from "../services/IssueDataService";
+    import Issue from "../types/Issue";
+@Component
+  export default class IssueCard extends Vue{
+    private issue = {} as Issue;
+
+    data() {
+        return {
+            date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            date2: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            menu1: false,
+            modal: false,
+            menu2: false,
+        }
+    }
+
+    fetchIssueById(id: string) {
+    IssueDataService.getById(id)
+      .then((response) => {
+        this.issue = response.data;
+        console.log('Response Data: ',response.data);
+        this.issue.created = new Date(this.issue.created).toLocaleDateString();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+      
+    }
+
+    mounted(){
+        this.fetchIssueById(this.$route.params.id); 
+    }
+    
   }
 </script>
+
+<style scoped>
+    .selectbox {
+        width: 100%;
+        height: 56px;
+        border-style: solid;
+        border-radius: 5px;
+        -webkit-appearance: auto;
+        -moz-appearance: auto;
+    }
+</style>
