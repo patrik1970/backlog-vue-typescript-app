@@ -92,7 +92,7 @@
                         <template v-slot:activator="{ on, attrs }">
                             <v-text-field
                                 outlined
-                                v-model="date2"
+                                v-model="issue.completed"
                                 label="Completed"
                                 prepend-icon="mdi-calendar"
                                 readonly
@@ -101,7 +101,7 @@
                             ></v-text-field>
                         </template>
                         <v-date-picker
-                            v-model="date2"
+                            v-model="issue.completed"
                             no-title
                             scrollable
                         >
@@ -164,7 +164,6 @@
     data() {
         return {
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-            date2: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             menu1: false,
             modal: false,
             menu2: false,
@@ -177,6 +176,7 @@
         this.issue = response.data;
         console.log('Response Data: ',response.data);
         this.issue.created = new Date(this.issue.created).toLocaleDateString();
+        this.issue.completed = new Date(this.issue.completed).toLocaleDateString();
       })
       .catch((e) => {
         console.log(e);
