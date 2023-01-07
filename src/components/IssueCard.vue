@@ -130,19 +130,22 @@
                     <v-btn 
                         depressed
                         color="primary"
+                        @click="cancel"
                         x-large
                     >
-                        Abort
+                        Cancel
                     </v-btn>
                     <v-btn
                         outlined
+                        @click="issueUpdate"
                         x-large
                     >
-                        Save Issue
+                        Update Issue
                     </v-btn>
                     <v-btn
                         outlined
                         color="error"
+                        @click="deleteIssue"
                         x-large
                     >
                         Delete Issue
@@ -186,6 +189,32 @@
 
     mounted(){
         this.fetchIssueById(this.$route.params.id); 
+    }
+
+    cancel() {
+        return this.$router.push('/')
+    }
+
+    issueUpdate() {
+        IssueDataService.update(this.issue.id, this.issue)
+      .then((response) => {
+        console.log(response.data);
+        return this.$router.push('/')
+      })
+      .catch((e) => {
+        console.log(e);
+      });    
+    }
+
+    deleteIssue() {
+        IssueDataService.delete(this.issue.id)
+      .then((response) => {
+        console.log(response.data);
+        return this.$router.push('/')
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     }
     
   }
