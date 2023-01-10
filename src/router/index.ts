@@ -14,6 +14,11 @@ const routes: Array<RouteConfig> = [
         path: "/issue-card/:id",
         name: "issue-card",
         component: () => import("../components/IssueCard.vue")
+    },
+    {
+        path: "/add-card",
+        name: "add-card",
+        component: () => import("../components/AddCard.vue")
     }
 ];
 
