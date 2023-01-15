@@ -18,10 +18,12 @@
                     </select>
                 </v-col>
                 <v-col>
-                    <v-text-field
-                        label="Outlined"
-                        outlined
-                    ></v-text-field>
+                    <select class="selectbox" v-model="issue.priority">
+                        <option disabled value='3'>Please select priority</option>
+                        <option value='0'>Low</option>
+                        <option value='1'>Medium</option>
+                        <option value='2'>High</option>
+                    </select>
                 </v-col>
             </v-row>      
             <v-textarea
@@ -78,6 +80,7 @@ export default class AddCard extends Vue {
     id: 0,
     title: "",
     issueType: 3,
+    priority: 3,
   };
 }
 </script>
