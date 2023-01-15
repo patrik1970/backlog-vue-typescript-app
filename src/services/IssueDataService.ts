@@ -16,6 +16,10 @@ class IssueDataService {
   delete(id: number) {
     return http.delete(`/Issue/${id}`);
   }
+
+  create(data: any) {
+    return http.post("/Issue", data);
+  }
 }
 
 export default new IssueDataService();
