@@ -1,4 +1,11 @@
 <template>
+  <div>
+    <v-card>
+      <v-toolbar>
+        <v-toolbar-title>Backlog 1.0</v-toolbar-title>
+      </v-toolbar>
+    </v-card>
+
     <v-card elevation="2" outlined>
         <v-container>
             <v-row  class="d-flex justify-space-between">
@@ -154,6 +161,7 @@
             </v-row>      
         </v-container>   
     </v-card>
+  </div>
 </template>
 
 <script lang="ts">

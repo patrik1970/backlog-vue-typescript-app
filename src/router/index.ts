@@ -19,7 +19,7 @@ const routes: Array<RouteConfig> = [
         path: "/add-card",
         name: "add-card",
         component: () => import("../components/AddCard.vue")
-    }
+    },
 ];
 
 const router = new VueRouter({
